@@ -1,0 +1,39 @@
+# Remove the question mark from the request but maintain the query string
+
+RewriteEngine On
+
+# In case the url rewrite does not work, it may be a permission error that causes that so uncomment the lines below.
+#<Directory "Applications/MAMP/htdocs/kaz-framework">
+#    Require all granted
+#    AllowOverride All
+#</Directory>
+
+#RewriteBase /Applications/MAMP/htdocs/kaz-framework/
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteRule ^(.*)$ index.php?$1 [L,QSA]
+
+# Laravel htaccess code
+#<IfModule mod_rewrite.c>
+#    <IfModule mod_negotiation.c>
+#        Options -MultiViews -Indexes
+#    </IfModule>
+#
+#    RewriteEngine On
+#
+#    # Handle Authorization Header
+#    RewriteCond %{HTTP:Authorization} .
+#    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+#
+#    # Redirect Trailing Slashes If Not A Folder...
+#    RewriteCond %{REQUEST_FILENAME} !-d
+#    RewriteCond %{REQUEST_URI} (.+)/$
+#    RewriteRule ^ %1 [L,R=301]
+#
+#    # Send Requests To Front Controller...
+#    RewriteCond %{REQUEST_FILENAME} !-d
+#    RewriteCond %{REQUEST_FILENAME} !-f
+#    RewriteRule ^ index.php [L]
+#</IfModule>
+
