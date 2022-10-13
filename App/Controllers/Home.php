@@ -2,11 +2,17 @@
 
 namespace App\Controllers;
 
+use Core\View;
+
 class Home extends BaseController
 {
 
     public function indexAction()
     {
-        echo 'Hello from index in the Home controller';
+        $nexus = [
+            'title' => 'Home Page - Welcome to Kazvel. Your awesome light weight framework for small projects'
+        ];
+
+        View::render('home.index', $nexus);
     }
 }
