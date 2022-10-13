@@ -5,7 +5,7 @@ namespace App\Controllers;
 class Home extends BaseController
 {
 
-    public function index()
+    public function indexAction()
     {
         echo 'Hello from index in the Home controller';
     }

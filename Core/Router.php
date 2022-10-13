@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use Exception;
+
 /**
  * Router
  */
@@ -87,6 +89,7 @@ class Router
      * Dispatch the route, creating the controller object and running the action method
      * @param string $url The route URL
      * @return void
+     * @throws Exception
      */
     public function dispatch($url)
     {
@@ -95,7 +98,7 @@ class Router
         if ($this->match($url)) {
             $controller = $this->params['controller'];
             $controller = $this->convertToStudlyCaps($controller);
-            $controller = "App\Controllers\\$controller";
+            $controller = $this->getNamespace().$controller;
 
             if (class_exists($controller)) {
                 $controller_object = new $controller($this->params);
@@ -103,15 +106,15 @@ class Router
                 $action = $this->params['action'];
                 $action = $this->convertToCamelCase($action);
 
-                if (is_callable([$controller_object, $action])) {
+                if (preg_match('/action$/i', $action) == 0) {
                     $controller_object->$action();
                 }
                 else {
-                    echo "Method $action (in controller $controller) not found";
+                    throw new Exception('Method '.$action.' (in controller '.$controller.') not found');
                 }
             }
             else {
-                echo "Controller class $controller not found";
+                throw new Exception('Controller class '.$controller.' not found');
             }
         }
         else {
@@ -161,5 +164,20 @@ class Router
         }
 
         return $url;
+    }
+
+    /**
+     * Gets the namespace for the controller class. The namespace defined in the route parameters is added if present.
+     * @return string The request URL
+     */
+    protected function getNamespace()
+    {
+        $namespace = 'App\Controllers\\';
+
+        if (array_key_exists('namespace', $this->params)) {
+            $namespace .= $this->params['namespace'].'\\';
+        }
+
+        return $namespace;
     }
 }
