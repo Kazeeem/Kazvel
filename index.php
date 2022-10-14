@@ -1,17 +1,9 @@
 <?php
 
 /**
- * Autoloader
+ * Autoload all files and classes
  */
-spl_autoload_register(function ($class) {
-    $root = __DIR__; // Get parent directory
-    $file = $root.'/'.str_replace('\\', '/', $class).'.php';
-    if (is_readable($file)) {
-        require $root.'/'.str_replace('\\', '/', $class).'.php';
-    }
-});
-
-//require 'Core/Router.php';
+require_once __DIR__.'/vendor/autoload.php';
 
 $router = new Core\Router();
 

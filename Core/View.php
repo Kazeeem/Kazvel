@@ -2,29 +2,24 @@
 
 namespace Core;
 
-use Exception;
+use FiftyOnRed\Blade\Blade;
 
 class View
 {
     /**
      * @param string $view The view file
      * @param array $data
-     * @throws Exception
-     * @return void
+     * @param array $merge_data
+     *
      */
-    public static function render($view, $data = [])
+    public static function render($view, $data = [], $merge_data = [])
     {
-        $view = str_replace('.', '/', $view); // Replace the dots with a forward slash.
-        $view = $view.'.razor.php';
+        $views = dirname(__DIR__) . '/Razors';
+        $cache = dirname(__DIR__) . '/Core/Cache';
 
-        $file = dirname(__DIR__).'/Razors/Views/'.$view;
+        //extract($data, EXTR_SKIP); // This handles the $data passed to the view.
 
-        if (is_readable($file)) {
-            extract($data, EXTR_SKIP); // This handles the $data passed to the view.
-            require $file;
-        }
-        else {
-            throw new Exception('View '.$file.' not found');
-        }
+        $blade = new Blade($views, $cache);
+        return $blade->view()->make($view, $data, $merge_data);
     }
 }
