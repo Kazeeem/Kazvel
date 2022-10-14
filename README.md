@@ -13,3 +13,6 @@ Features To Add:
 * Database functionality. Preferably ORM (Of course)
 * Authentication Functionality
 * That's all for now, we add more when the need arises.
+
+
+# LET'S HAVE FUN CODING...
