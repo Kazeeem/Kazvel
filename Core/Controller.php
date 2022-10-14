@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controllers;
+namespace Core;
 
 use Exception;
 
-abstract class BaseController
+abstract class Controller
 {
     /**
      * Parameters from the matched route

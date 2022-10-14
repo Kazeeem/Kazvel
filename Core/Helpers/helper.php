@@ -14,3 +14,17 @@ if (!function_exists('view')) {
         echo View::render($view, $data, $mergeData);
     }
 }
+
+if (!function_exists('env')) {
+    /**
+     * Gets the value of an environment variable.
+     *
+     * @param  string  $key
+     * @param  mixed  $default
+     * @return mixed
+     */
+    function env($key, $default = null)
+    {
+        //return Env::get($key, $default);
+    }
+}

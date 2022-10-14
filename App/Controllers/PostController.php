@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
-class Posts extends BaseController
+use Core\Controller;
+
+class PostController extends Controller
 {
     /**
      * Show the index page
