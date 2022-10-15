@@ -5,6 +5,13 @@
  */
 require_once __DIR__.'/vendor/autoload.php';
 
+/**
+ * Error and exception handling
+ */
+error_reporting(E_ALL);
+set_error_handler('Core\ErrorsException::errorHandler');
+set_exception_handler('Core\ErrorsException::exceptionHandler');
+
 $router = new Core\Router();
 
 // Add routes

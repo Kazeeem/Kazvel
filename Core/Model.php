@@ -35,11 +35,8 @@ abstract class Model
             $username = $db_params['db_username'];
             $password = $db_params['db_password'];
 
-            try {
-                $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-            } catch (\PDOException $e) {
-                echo $e->getMessage();
-            }
+            $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
 
         return $db;

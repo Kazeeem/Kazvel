@@ -21,6 +21,17 @@ class Router
      */
     protected array $params = [];
 
+    public function __construct()
+    {
+        $selected_default_timezone = env('DEFAULT_TIMEZONE', 'Africa/Lagos');
+
+        if (function_exists('date_default_timezone_set')) {
+            date_default_timezone_set($selected_default_timezone);
+        } else {
+            ini_set('date.timezone', $selected_default_timezone);
+        }
+    }
+
     /**
      * Add a route to the routing table
      * @param string $route The route URL
@@ -118,7 +129,7 @@ class Router
             }
         }
         else {
-            echo 'No route matched.';
+            throw new Exception('No route matched.', 404);
         }
     }
 
