@@ -1,6 +1,7 @@
 {
     "require": {
-        "50onred/laravel-blade": "^1.3"
+        "50onred/laravel-blade": "^1.3",
+        "vlucas/phpdotenv": "^5.4"
     },
     "autoload": {
         "psr-4": {

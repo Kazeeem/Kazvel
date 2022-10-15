@@ -5,6 +5,13 @@
 </head>
 <body>
     <h1>Hurray, first output in the view.</h1>
-    <p><?php echo $title; ?></p>
+    <p><?php echo $nexus['title']; ?></p>
+    <br>
+    <h3>Here is a list of records from the database</h3>
+    <ol>
+        <?php foreach ($posts as $post): ?>
+            <li><?php echo $post['name']; ?></li>
+        <?php endforeach; ?>
+    </ol>
 </body>
 </html>

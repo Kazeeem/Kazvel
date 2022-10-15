@@ -97,14 +97,14 @@ class Router
 
         if ($this->match($url)) {
             $controller = $this->params['controller'];
-            $controller = $this->convertToStudlyCaps($controller);
+            $controller = convertToStudlyCaps($controller);
             $controller = $this->getNamespace().$controller;
 
             if (class_exists($controller)) {
                 $controller_object = new $controller($this->params);
 
                 $action = $this->params['action'];
-                $action = $this->convertToCamelCase($action);
+                $action = convertToCamelCase($action);
 
                 if (preg_match('/action$/i', $action) == 0) {
                     $controller_object->$action();
@@ -120,30 +120,6 @@ class Router
         else {
             echo 'No route matched.';
         }
-    }
-
-    /**
-     * Convert the string with hyphens to StudlyCaps,
-     * e.g. post-authors => PostAuthors
-     *
-     * @param string $string The string to convert
-     * @return string
-     */
-    protected function convertToStudlyCaps($string)
-    {
-        return str_replace(' ', '', ucwords(str_replace('-', ' ', $string)));
-    }
-
-    /**
-     * Convert the string with hyphens to camelCase,
-     * e.g. add-new => addNew
-     *
-     * @param string $string The string to convert
-     * @return string
-     */
-    protected function convertToCamelCase($string)
-    {
-        return lcfirst($this->convertToStudlyCaps($string));
     }
 
     /**
